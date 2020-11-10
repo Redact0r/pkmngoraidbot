@@ -47,6 +47,7 @@ module.exports = {
         { name: "Participants", value: [0] },
         { name: "Time Remaining", value: `${timeRemaining} minutes` },
       ]);
+
     return msg.channel
       .send(messageEmbed)
       .then((message) => {

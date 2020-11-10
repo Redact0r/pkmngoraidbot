@@ -40,6 +40,14 @@ bot.on("message", (msg) => {
   //   reaction.emoji.name === "🕵️‍♂️";
   // };
   bot.on("messageReactionAdd", (reaction, user) => {
+    if (reaction.message.reactions.cache.size > 1) {
+      reaction.remove();
+    }
+
+    // if (reaction.message.reactions.cache.map((x) => x.count) > 1) {
+    //   console.log(reaction.message.reactions.get("🕵️‍♂️"));
+    // }
+
     function getNickname(array) {
       for (let i = 0; i < array.length; i++) {
         if (array[i].id === user.id) {
@@ -54,8 +62,10 @@ bot.on("message", (msg) => {
       reaction.message.author.bot &&
       user.id !== "773710233977618464"
     ) {
+      const message = reaction.message.id;
+      console.log(message);
       let newEmbed = reaction.message.embeds[0];
-      console.log(typeof newEmbed);
+
       let guildMembers = reaction.message.guild.members.cache.map(
         (member, i) => {
           let rMember = {};
@@ -70,15 +80,16 @@ bot.on("message", (msg) => {
         newEmbed.fields[2].value = [
           `${newEmbed.fields[2].value.length}. ${newParticipant}`,
         ];
-        console.log(newEmbed.fields[2].value);
       } else {
         let participants = newEmbed.fields[2].value;
-        let num = participants.split("\n").length || 0;
+        let num =
+          typeof participants === "string"
+            ? participants.split("\n").length
+            : 0;
         let newEntry = `\n${num + 1}. ${newParticipant}`;
         participants += newEntry;
 
         newEmbed.fields[2] = { name: "Participants", value: participants };
-        console.log(newEmbed.fields[2].value);
       }
 
       newEmbed.fields[1] = {
@@ -89,6 +100,8 @@ bot.on("message", (msg) => {
       return reaction.message.edit(newEmbedObj);
     }
   });
+
+  // bot.on("messageReactionRemove");
 
   try {
     bot.commands.get(command).execute(msg, args);
