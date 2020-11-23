@@ -46,7 +46,6 @@ bot.on("message", (msg) => {
 });
 
 bot.on("messageReactionAdd", (reaction, user) => {
-  console.log(`emoji added by ${user.tag}`);
   if (reaction.message.reactions.cache.size > 1) {
     reaction.remove();
   }
@@ -173,6 +172,5 @@ bot.on("messageReactionRemove", (reaction, user) => {
 });
 
 //TO-DO
-//Fix list-order-name bug
 //fix react-to-another-bot-with-emoji bug
 //keep testing
