@@ -61,9 +61,20 @@ bot.on("messageReactionAdd", (reaction, user) => {
 
   if (
     reaction.emoji.name === "🕵️‍♂️" &&
+    reaction.message.author.id !== "773710233977618464"
+  ) {
+    return;
+  }
+
+  if (
+    reaction.emoji.name === "🕵️‍♂️" &&
     reaction.message.author.bot &&
     user.id !== "773710233977618464"
   ) {
+    if (reaction.message.embeds.length < 1 && reaction.message.author.bot) {
+      return;
+    }
+
     const spotsLeft = reaction.message.embeds[0].fields[1].value;
 
     if (spotsLeft == 0) {
@@ -125,10 +136,6 @@ bot.on("messageReactionRemove", (reaction, user) => {
   }
 
   const spotsLeft = reaction.message.embeds[0].fields[1].value;
-
-  if (spotsLeft == 0) {
-    return;
-  }
 
   if (
     reaction.emoji.name === "🕵️‍♂️" &&

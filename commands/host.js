@@ -46,7 +46,13 @@ module.exports = {
     let timeRemaining = args[6];
 
     if (!boss || !spotsOpen || !friendCode) {
-      return msg.reply("Command should be..");
+      return msg.reply(
+        `\nPlease reply in the following format:\n\`\`\`\n!host <boss> <spots left> <friend code> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
+      );
+    }
+
+    if (spotsOpen == 0) {
+      return msg.reply("Must have at least 1 spot available.");
     }
 
     if (!timeRemaining) {
