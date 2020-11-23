@@ -1,3 +1,4 @@
+const { User } = require("discord.js");
 const Discord = require("../node_modules/discord.js");
 
 module.exports = {
@@ -19,6 +20,24 @@ module.exports = {
       return rMember;
     });
 
+    //triggers to correct user-input
+    if (
+      args.length < 6 ||
+      args.length > 7 ||
+      !isNaN(args[1]) ||
+      args[3].substring(0).length !== 4 ||
+      args[4].substring(0).length !== 4 ||
+      args[5].substring(0).length !== 4 ||
+      isNaN(args[2]) ||
+      isNaN(args[3]) ||
+      isNaN(args[4]) ||
+      isNaN(args[3] + args[4] + args[5])
+    ) {
+      return msg.reply(
+        `\nPlease reply in the following format:\n\`\`\`\n!host <boss> <spots left> <friend code> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
+      );
+    }
+
     let boss = args[1].replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
@@ -31,9 +50,8 @@ module.exports = {
     }
 
     if (!timeRemaining) {
-      timeRemaining = 1;
+      timeRemaining = 30;
     }
-    console.log(args, boss, spotsOpen, friendCode, timeRemaining);
 
     const messageEmbed = new Discord.MessageEmbed()
       .setColor("#ee1515")
@@ -41,7 +59,7 @@ module.exports = {
       .addFields([
         {
           name: "Host",
-          value: `${getNickname(guildMembers)} ${friendCode}`,
+          value: `${getNickname(guildMembers) || msg.author} ${friendCode}`,
         },
         { name: "Spots Left", value: `${spotsOpen}` },
         { name: "Participants", value: [0] },
@@ -55,10 +73,5 @@ module.exports = {
         message.delete({ timeout: timeRemaining * 60 * 1000 });
       })
       .catch((error) => console.log(error));
-
-    //edit msg to remove player when they react (and add spot open)
-    //stop reactions when there's maximum players
-    //format message to make it look pretty
-    //event listener, maybe not on this command v
   },
 };
