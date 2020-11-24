@@ -115,6 +115,14 @@ bot.on("messageReactionAdd", (reaction, user) => {
 });
 
 bot.on("messageReactionRemove", (reaction, user) => {
+  const spotsLeft = reaction.message.embeds[0].fields[1].value;
+  const userLength = reaction.message.embeds[0].fields[2].value.split("\n");
+
+  const checkNum = userLength.length + 1;
+  if (spotsLeft == 0 && reaction.count == checkNum) {
+    return;
+  }
+
   function getNickname(array) {
     for (let i = 0; i < array.length; i++) {
       if (array[i].id === user.id) {
@@ -134,8 +142,6 @@ bot.on("messageReactionRemove", (reaction, user) => {
     }
     return newUserListArray;
   }
-
-  const spotsLeft = reaction.message.embeds[0].fields[1].value;
 
   if (
     reaction.emoji.name === "🕵️‍♂️" &&
@@ -180,4 +186,4 @@ bot.on("messageReactionRemove", (reaction, user) => {
 
 //TO-DO
 //fix react-to-another-bot-with-emoji bug
-//keep testing
+//keep testing reaction.message.users.reaction
