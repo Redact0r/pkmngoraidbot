@@ -1,3 +1,3 @@
 module.exports = {
-  host: require("./host"),
+  hosting: require("./hosting"),
 };

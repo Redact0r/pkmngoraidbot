@@ -119,6 +119,7 @@ bot.on("messageReactionRemove", (reaction, user) => {
   const userLength = reaction.message.embeds[0].fields[2].value.split("\n");
 
   const checkNum = userLength.length + 1;
+
   if (spotsLeft == 0 && reaction.count == checkNum) {
     return;
   }
