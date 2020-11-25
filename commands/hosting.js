@@ -1,7 +1,7 @@
-const Discord = require("../node_modules/discord.js");
+const Discord = require("discord.js");
 
 module.exports = {
-  name: "host",
+  name: "hosting",
   description: "host a raid",
   execute(msg, args) {
     function getNickname(array) {
