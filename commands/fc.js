@@ -14,9 +14,8 @@ module.exports = {
     if (!args[1]) {
       return;
     }
-    console.log(msg.author.id);
-    const userid = Number(msg.author.id);
-    console.log(userid);
+
+    const userid = msg.author.id;
 
     if (args[2].toLowerCase() !== "pogo") {
       return msg.channel.send(
