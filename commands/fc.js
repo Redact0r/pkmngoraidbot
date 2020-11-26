@@ -3,7 +3,7 @@ const friendService = require("../services/friendService");
 module.exports = {
   name: "fc",
   description: "set and retrieve your friend code",
-  execute = async (msg, args) => {
+  async execute(msg, args) {
     const mentionMap = msg.mentions.users.map((m) => {
       return m.user;
     });
@@ -32,7 +32,7 @@ module.exports = {
         );
       } else {
         const friendCode = args[3];
-        const codeExists = await friendService.getFriendCode() || null;
+        const codeExists = (await friendService.getFriendCode()) || null;
         console.log(codeExists);
 
         if (!codeExists) {
