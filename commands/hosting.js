@@ -38,11 +38,10 @@ module.exports = {
       args.length < 3 ||
       args.length > 4 ||
       !isNaN(args[1]) ||
-      isNaN(args[2]) ||
-      isNaN(args[3])
+      isNaN(args[2])
     ) {
       return msg.reply(
-        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
+        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <time remaining>\`\`\`\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 5\`\`\``
       );
     }
 
@@ -52,9 +51,9 @@ module.exports = {
     let spotsOpen = args[2];
     let timeRemaining = args[3] || 30;
 
-    if (!boss || !spotsOpen || !friendCode) {
+    if (!boss || !spotsOpen || !friendCode || isNaN(timeRemaining)) {
       return msg.reply(
-        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
+        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <time remaining>\`\`\`\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 5\`\`\``
       );
     }
 
