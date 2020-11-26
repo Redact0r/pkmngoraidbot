@@ -15,11 +15,10 @@ module.exports = {
       return;
     }
     const userid = parseInt(msg.author.id);
-    console.log(userid);
-
+    console.log(typeof args[2], args[2]);
     if (args[2].toLowerCase() !== "pogo") {
       return msg.channel.send(
-        `Set code with following format:\n\`\`\`\n!fc set pogo xxxx-xxxx-xxxx\`\`\``
+        `Set friend code with following format:\n\`\`\`\n!fc set pogo xxxx-xxxx-xxxx\`\`\`\n\nDelete friend code with following format:\n\`\`\`\n!fc delete pogo\`\`\``
       );
     }
     if (args[1].toLowerCase() == "set") {
