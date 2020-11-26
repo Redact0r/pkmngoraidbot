@@ -19,7 +19,9 @@ const friendService = {
       .update("friend_code", friendCode)
       .returning("*");
   },
-  deleteFriendCode(user_id) {},
+  deleteFriendCode(user_id) {
+    return db("users").where({ user_id: user_id }).del();
+  },
 };
 
 module.exports = friendService;

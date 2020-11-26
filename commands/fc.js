@@ -76,7 +76,18 @@ module.exports = {
     }
 
     if (args[1] && args[1].toLowerCase() == "delete") {
-      msg.channel.send(args[3]);
+      try {
+        const success = friendService.deleteFriendCode(userid);
+        if (!sucess) {
+          return msg.reply(
+            "Something went wrong trying to delete. Do you have a friend code saved?"
+          );
+        }
+      } catch (error) {
+        console.log(error);
+        return msg.reply("Something went wrong. Wait a minute and try again.");
+      }
+      return msg.reply("Friend code deleted!");
     }
   },
 };
