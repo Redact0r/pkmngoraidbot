@@ -6,8 +6,7 @@ const friendService = {
     return db("users")
       .select("friend_code")
       .where("user_id", user_id)
-      .then((res) => res[0].friend_code)
-      .catch((error) => console.log(error));
+      .then((res) => res[0].friend_code);
   },
   postNewFriendCode(user_id, friendCode) {
     return db("users")
