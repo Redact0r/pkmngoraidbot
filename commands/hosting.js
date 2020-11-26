@@ -9,6 +9,7 @@ module.exports = {
     let friendCode;
     try {
       const success = await friendService.getFriendCode(userid);
+      console.log(success);
       if (!success) {
         return msg.reply("You don't have a friend code saved.");
       }
