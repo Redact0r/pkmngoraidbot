@@ -119,7 +119,9 @@ bot.on("messageReactionAdd", (reaction, user) => {
       const guildMap = reaction.message.guild.members.cache.map((m) => {
         return m;
       });
-      let host = guildMap.find((user) => user.nickname == hostSplit);
+
+      let host = guildMap.find((user) => user.nickname == hostSplit) || null;
+
       if (host) {
         let searchableListValue = newEmbed.fields[2].value;
         let searchableListSplit = searchableListValue.split(/[\n.]/) || null;
