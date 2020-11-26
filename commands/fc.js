@@ -32,7 +32,7 @@ module.exports = {
         );
       } else {
         const friendCode = args[3];
-        const codeExists = (await friendService.getFriendCode(userid)) || null;
+        const codeExists = await friendService.getFriendCode(userid);
         console.log(codeExists);
 
         if (!codeExists) {
