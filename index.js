@@ -46,7 +46,10 @@ bot.on("message", (msg) => {
 });
 
 bot.on("messageReactionAdd", (reaction, user) => {
-  if (reaction.message.reactions.cache.size > 1) {
+  if (
+    reaction.message.reactions.cache.size > 1 &&
+    reaction.message.author.id == "773710233977618464"
+  ) {
     reaction.remove();
   }
 
