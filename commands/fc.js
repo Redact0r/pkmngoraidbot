@@ -14,7 +14,9 @@ module.exports = {
     if (!args[1]) {
       return;
     }
+    console.log(msg.author.id);
     const userid = Number(msg.author.id);
+    console.log(userid);
 
     if (args[2].toLowerCase() !== "pogo") {
       return msg.channel.send(
@@ -36,14 +38,13 @@ module.exports = {
       } else {
         const friendCode = args[3];
         const codeExists = await friendService.getFriendCode(userid);
-        console.log(codeExists);
-
         if (!codeExists) {
           try {
             const newEntry = {
               user_id: userid,
               friend_code: friendCode,
             };
+            console.log(newEntry.user_id);
             const success = await friendService.postNewFriendCode(newEntry);
             if (!success) {
               return msg.reply(
