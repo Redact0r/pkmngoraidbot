@@ -184,7 +184,3 @@ bot.on("messageReactionRemove", (reaction, user) => {
     return reaction.message.edit(newEmbedObj);
   }
 });
-
-//TO-DO
-//fix react-to-another-bot-with-emoji bug
-//keep testing reaction.message.users.reaction
