@@ -8,8 +8,8 @@ module.exports = {
     const userid = msg.author.id;
     let friendCode;
     try {
-      const success = await friendService.getFriendCode(userid).friend_code;
-      console.log(success);
+      const success = await friendService.getFriendCode(userid);
+      console.log(success, success[0], success.friend_code);
       if (!success) {
         return msg.reply("You don't have a friend code saved.");
       }
