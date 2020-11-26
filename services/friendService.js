@@ -10,11 +10,7 @@ const friendService = {
       .then((res) => res[0])
       .catch((error) => console.log(error));
   },
-  postNewFriendCode(user_id, friendCode) {
-    let newEntry = {
-      user_id,
-      friend_code: friendCode,
-    };
+  postNewFriendCode(newEntry) {
     return db.insert(newEntry).into("users").returning("*");
   },
   updateFriendCode(user_id, friendCode) {},

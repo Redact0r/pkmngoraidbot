@@ -37,7 +37,16 @@ module.exports = {
 
         if (!codeExists) {
           try {
-            friendService.postNewFriendCode(userid, friendCode);
+            const newEntry = {
+              user_id,
+              friend_code: friendCode,
+            };
+            const success = await friendService.postNewFriendCode(newEntry);
+            if (!success) {
+              msg.reply(
+                "Something went wrong when trying add new friend code."
+              );
+            }
           } catch (error) {
             console.log(error);
             return msg.reply(
@@ -47,7 +56,13 @@ module.exports = {
           return msg.reply("Friend code added!");
         } else
           try {
-            friendService.updateFriendCode(userid, friendCode);
+            const success = await friendService.updateFriendCode(
+              userid,
+              friendCode
+            );
+            if (!success) {
+              msg.reply("Something went wrong when trying to update score.");
+            }
           } catch (error) {
             console.log(error);
             return msg.reply(
