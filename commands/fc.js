@@ -14,7 +14,7 @@ module.exports = {
     if (!args[1]) {
       return;
     }
-    const userid = msg.author.id;
+    const userid = parseInt(msg.author.id);
     console.log(userid);
 
     if (args[1].toLowerCase() == "set") {
