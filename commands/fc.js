@@ -17,11 +17,15 @@ module.exports = {
     const userid = parseInt(msg.author.id);
     console.log(userid);
 
+    if (args[2].toLowerCase() !== "pogo") {
+      return msg.channel.send(
+        `Set code with following format:\n\`\`\`\n!fc set pogo xxxx-xxxx-xxxx\`\`\``
+      );
+    }
     if (args[1].toLowerCase() == "set") {
       let codeCheck = args[3].split("-");
       if (
         !args[3] ||
-        args[2].toLowerCase() !== "pogo" ||
         codeCheck.length !== 3 ||
         codeCheck[0].length !== 4 ||
         codeCheck[1].length !== 4 ||
