@@ -44,7 +44,6 @@ module.exports = {
               "Something went wrong. Wait a minute and try again."
             );
           }
-
           return msg.reply("Friend code added!");
         } else
           try {
