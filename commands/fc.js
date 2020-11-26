@@ -37,17 +37,6 @@ module.exports = {
 
         if (!codeExists) {
           try {
-            friendService.updateFriendCode(userid, friendCode);
-          } catch (error) {
-            console.log(error);
-            return msg.reply(
-              "Something went wrong. Wait a minute and try again."
-            );
-          }
-
-          return msg.reply("Friend code updated!");
-        } else
-          try {
             friendService.postNewFriendCode(userid, friendCode);
           } catch (error) {
             console.log(error);
@@ -56,7 +45,17 @@ module.exports = {
             );
           }
 
-        return msg.reply("Friend code added!");
+          return msg.reply("Friend code added!");
+        } else
+          try {
+            friendService.updateFriendCode(userid, friendCode);
+          } catch (error) {
+            console.log(error);
+            return msg.reply(
+              "Something went wrong. Wait a minute and try again."
+            );
+          }
+        return msg.reply("Friend code updated!");
       }
     }
 
