@@ -13,7 +13,12 @@ const friendService = {
   postNewFriendCode(newEntry) {
     return db.insert(newEntry).into("users").returning("*");
   },
-  updateFriendCode(user_id, friendCode) {},
+  updateFriendCode(user_id, friendCode) {
+    return db("users")
+      .where("user_id", user_id)
+      .update("friend_code", friendCode)
+      .returning("*");
+  },
   deleteFriendCode(user_id) {},
 };
 

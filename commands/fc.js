@@ -43,7 +43,7 @@ module.exports = {
             };
             const success = await friendService.postNewFriendCode(newEntry);
             if (!success) {
-              msg.reply(
+              return msg.reply(
                 "Something went wrong when trying add new friend code."
               );
             }
@@ -61,7 +61,9 @@ module.exports = {
               friendCode
             );
             if (!success) {
-              msg.reply("Something went wrong when trying to update score.");
+              return msg.reply(
+                "Something went wrong when trying to update score."
+              );
             }
           } catch (error) {
             console.log(error);
