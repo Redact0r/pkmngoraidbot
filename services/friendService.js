@@ -3,7 +3,6 @@ const db = require("knex")({ client: "pg", connection: DATABASE_URL });
 
 const friendService = {
   getFriendCode(user_id) {
-    console.log(user_id);
     return db("users")
       .select("friend_code")
       .where("user_id", user_id)

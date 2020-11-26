@@ -1,9 +1,22 @@
 const Discord = require("discord.js");
+const friendService = require("../services/friendService");
 
 module.exports = {
   name: "hosting",
   description: "host a raid",
-  execute(msg, args) {
+  async execute(msg, args) {
+    const userid = msg.author.id;
+    let friendCode;
+    try {
+      const success = await friendService.getFriendCode(userid);
+      if (!success) {
+        return msg.reply("You don't have a friend code saved.");
+      }
+      friendCode = success;
+    } catch (error) {
+      console.log(error);
+    }
+
     function getNickname(array) {
       for (let i = 0; i < array.length; i++) {
         if (array[i].id === msg.author.id) {
@@ -21,19 +34,14 @@ module.exports = {
 
     //triggers to correct user-input
     if (
-      args.length < 6 ||
-      args.length > 7 ||
+      args.length < 3 ||
+      args.length > 4 ||
       !isNaN(args[1]) ||
-      args[3].substring(0).length !== 4 ||
-      args[4].substring(0).length !== 4 ||
-      args[5].substring(0).length !== 4 ||
       isNaN(args[2]) ||
-      isNaN(args[3]) ||
-      isNaN(args[4]) ||
-      isNaN(args[3] + args[4] + args[5])
+      isNaN(args[3])
     ) {
       return msg.reply(
-        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <friend code> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
+        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
       );
     }
 
@@ -41,21 +49,16 @@ module.exports = {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
     let spotsOpen = args[2];
-    let friendCode = [args[3], args[4], args[5]].join(" ");
-    let timeRemaining = args[6];
+    let timeRemaining = args[3] || 30;
 
     if (!boss || !spotsOpen || !friendCode) {
       return msg.reply(
-        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <friend code> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
+        `\nPlease reply in the following format:\n\`\`\`\n!hosting <boss> <spots left> <time remaining>\`\`\`\nInclude spaces in your friend code.\nTime remaining is in minutes and is optional.\n\nExample:\n\`\`\`!host Darkrai 15 2342 3993 4002 4\`\`\``
       );
     }
 
     if (spotsOpen == 0) {
       return msg.reply("Must have at least 1 spot available.");
-    }
-
-    if (!timeRemaining) {
-      timeRemaining = 30;
     }
 
     const messageEmbed = new Discord.MessageEmbed()
