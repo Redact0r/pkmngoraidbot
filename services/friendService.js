@@ -11,9 +11,11 @@ const friendService = {
       .catch((error) => console.log(error));
   },
   postNewFriendCode(user_id, friendCode) {
-    return db("users")
-      .where("user_id", user_id)
-      .update("friend_code", friendCode);
+    let newEntry = {
+      user_id,
+      friend_code: friendCode,
+    };
+    return db.insert(newEntry).into("users").returning("*");
   },
   updateFriendCode(user_id, friendCode) {},
   deleteFriendCode(user_id) {},
