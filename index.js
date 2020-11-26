@@ -113,6 +113,25 @@ bot.on("messageReactionAdd", (reaction, user) => {
       value: newEmbed.fields[1].value - 1,
     };
     let newEmbedObj = new Discord.MessageEmbed(newEmbed);
+    if (newEmbed.fields[1].value == 0) {
+      let hostValue = newEmbed.fields[0].value;
+      let hostSplit = hostValue.slice(0, -15);
+      const guildMap = reaction.message.guild.members.cache.map((m) => {
+        return m;
+      });
+      let host = guildMap.find((user) => user.nickname == hostSplit);
+      if (host) {
+        let searchableListValue = newEmbed.fields[2].value;
+        let searchableListSplit = searchableListValue.split(/[\n.]/) || null;
+        if (searchableListSplit) {
+          let searchableListFilter = searchableListSplit.filter((item) =>
+            isNaN(parseInt(item))
+          );
+          let searchableList = searchableListFilter.join();
+          host.send(searchableList);
+        }
+      }
+    }
     return reaction.message.edit(newEmbedObj);
   }
 });
