@@ -77,8 +77,8 @@ module.exports = {
 
     if (args[1] && args[1].toLowerCase() == "delete") {
       try {
-        const success = friendService.deleteFriendCode(userid);
-        if (!sucess) {
+        const success = await friendService.deleteFriendCode(userid);
+        if (!success) {
           return msg.reply(
             "Something went wrong trying to delete. Do you have a friend code saved?"
           );
