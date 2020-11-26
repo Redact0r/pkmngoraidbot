@@ -38,7 +38,7 @@ module.exports = {
         if (!codeExists) {
           try {
             const newEntry = {
-              user_id,
+              user_id: userid,
               friend_code: friendCode,
             };
             const success = await friendService.postNewFriendCode(newEntry);
