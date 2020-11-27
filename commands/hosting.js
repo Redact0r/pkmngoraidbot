@@ -67,7 +67,9 @@ module.exports = {
       .addFields([
         {
           name: "Host",
-          value: `${getNickname(guildMembers) || msg.author} ${friendCode}`,
+          value: `${
+            getNickname(guildMembers) || msg.author.split("#")[0]
+          } ${friendCode}`,
         },
         { name: "Spots Left", value: `${spotsOpen}` },
         { name: "Participants", value: [0] },

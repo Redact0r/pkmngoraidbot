@@ -46,6 +46,11 @@ bot.on("message", (msg) => {
 });
 
 bot.on("messageReactionAdd", (reaction, user) => {
+  // let time = reaction.message.createdTimestamp;
+  // let currentTime = new Date().getTime();
+  // console.log(time - currentTime);
+  // function findTime() {}
+
   if (
     reaction.message.reactions.cache.size > 1 &&
     reaction.message.author.id == "773710233977618464"
