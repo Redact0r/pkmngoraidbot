@@ -1,6 +1,9 @@
 # Pokemon Go! Raid Organizer
 
-Developed by Tyler Sharp.
+Developed by Tyler Sharp
+
+johntylersharp@gmail.com
+
 
 ## Technology
 
