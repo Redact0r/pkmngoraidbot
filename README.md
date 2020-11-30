@@ -16,12 +16,16 @@ This bot was developed for a private client, so is not publicly available at thi
 ## Commands
 
 * Host a raid: 
+
         !hosting <boss name> <spots left> <time remaining (optional)>
+        ex: !hosting darkrai 3 10
   
 * Friend code storage:
-        * *!fc set pogo xxxx-xxxx-xxxx
-        * *!fc delete pogo xxxx-xxxx-xxxx
-        * This command is designed to work in sync with the NurseJoy Bot. You must have a fc saved with this bot in order to host a raid.
+
+        !fc set pogo xxxx-xxxx-xxxx
+        !fc delete pogo xxxx-xxxx-xxxx
+
+This command is designed to work in sync with the NurseJoy Bot. You must have a fc saved with this bot in order to host a raid.
 
 ## Meta
 
